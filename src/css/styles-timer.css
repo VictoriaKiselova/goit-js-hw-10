@@ -19,9 +19,9 @@ button {
   border: none;
   color: aliceblue;
 }
-/* button:hover {
+button:hover {
   background: #6c8cff;
-} */
+}
 .timer {
   margin-top: 20px;
   display: flex;

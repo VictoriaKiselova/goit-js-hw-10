@@ -2,6 +2,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import icon from '../img/icon.svg';
 
 const buttonStart = document.querySelector('[data-start]');
 buttonStart.setAttribute('disabled', false);
@@ -26,12 +27,12 @@ const options = {
     if (userSelectedDate.getTime() < dateNow.getTime()) {
       buttonStart.setAttribute('disabled', false);
       iziToast.show({
-        iconUrl: '../img/javascript.svg#fa-solid',
+        iconUrl: icon,
         message: 'Please choose a date in the future',
         color: '#ef4040',
         messageColor: 'white',
         timeout: 3000,
-        iconColor: 'black',
+        imageWidth: 50,
         position: 'topRight',
       });
     } else {
