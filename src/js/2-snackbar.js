@@ -6,20 +6,22 @@ const form = document.querySelector('.form');
 function onSubmit(event) {
   event.preventDefault();
   const delay = event.target.elements.delay.value;
-  let btn = event.target.elements.state.value;
+  let promiseState = event.target.elements.state.value;
 
-  const createPromise = (btn, delay) => {
+  const createPromise = (promiseState, delay) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (btn === 'fulfilled') {
+        if (promiseState === 'fulfilled') {
           resolve(delay);
+          return;
+        } else {
+          reject(delay);
         }
-        reject(delay);
       }, delay);
     });
   };
 
-  createPromise(btn, delay)
+  createPromise(promiseState, delay)
     .then(res => {
       iziToast.show({
         message: `✅ Fulfilled promise in ${delay} ms`,
@@ -37,5 +39,4 @@ function onSubmit(event) {
       });
     });
 }
-
 form.addEventListener('submit', onSubmit);

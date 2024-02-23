@@ -24,8 +24,8 @@ const options = {
     let userSelectedDate = new Date(selectedDates[0]);
     let dateNow = new Date();
     timeLeft = userSelectedDate.getTime() - dateNow.getTime();
-    if (userSelectedDate.getTime() < dateNow.getTime()) {
-      buttonStart.setAttribute('disabled', false);
+    if (userSelectedDate.getTime() <= dateNow.getTime()) {
+      buttonStart.setAttribute('disabled', true);
       iziToast.show({
         iconUrl: icon,
         message: 'Please choose a date in the future',
@@ -41,8 +41,9 @@ const options = {
   },
 };
 flatpickr(myInput, options);
+console.log(timeLeft);
 
-function convertMs(ms) {
+function updateTimerDisplay(ms) {
   console.log(ms);
   const second = 1000;
   const minute = second * 60;
@@ -73,7 +74,7 @@ function convertMs(ms) {
   }, 1000);
 }
 buttonStart.addEventListener('click', function () {
-  buttonStart.setAttribute('disabled', false);
-  myInput.setAttribute('disabled', false);
-  convertMs(timeLeft);
+  buttonStart.setAttribute('disabled', true);
+  myInput.setAttribute('disabled', true);
+  updateTimerDisplay(timeLeft);
 });
