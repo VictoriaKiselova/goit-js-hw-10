@@ -13,6 +13,7 @@ let minutesTimer = document.querySelector('[data-minutes]');
 let secondsTimer = document.querySelector('[data-seconds]');
 
 let timeLeft;
+let userSelectedDate;
 
 const options = {
   enableTime: true,
@@ -21,7 +22,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-    let userSelectedDate = new Date(selectedDates[0]);
+    userSelectedDate = new Date(selectedDates[0]);
     let dateNow = new Date();
     timeLeft = userSelectedDate.getTime() - dateNow.getTime();
     if (userSelectedDate.getTime() <= dateNow.getTime()) {
@@ -41,7 +42,7 @@ const options = {
   },
 };
 flatpickr(myInput, options);
-console.log(timeLeft);
+console.log(userSelectedDate);
 
 function updateTimerDisplay(ms) {
   console.log(ms);
