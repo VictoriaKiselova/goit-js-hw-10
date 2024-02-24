@@ -38,11 +38,11 @@ const options = {
       });
     } else {
       buttonStart.removeAttribute('disabled');
+      userSelectedDate = selectedDates[0];
     }
   },
 };
 flatpickr(myInput, options);
-console.log(userSelectedDate);
 
 function updateTimerDisplay(ms) {
   console.log(ms);
