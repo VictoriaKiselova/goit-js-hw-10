@@ -12,7 +12,6 @@ let hoursTimer = document.querySelector('[data-hours]');
 let minutesTimer = document.querySelector('[data-minutes]');
 let secondsTimer = document.querySelector('[data-seconds]');
 
-let timeLeft;
 let userSelectedDate;
 
 const options = {
@@ -22,10 +21,8 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-    userSelectedDate = new Date(selectedDates[0]);
-    let dateNow = new Date();
-    timeLeft = userSelectedDate.getTime() - dateNow.getTime();
-    if (userSelectedDate.getTime() <= dateNow.getTime()) {
+
+    if (selectedDates[0] < options.defaultDate) {
       buttonStart.setAttribute('disabled', true);
       iziToast.show({
         iconUrl: icon,
@@ -44,15 +41,17 @@ const options = {
 };
 flatpickr(myInput, options);
 
-function updateTimerDisplay(ms) {
-  console.log(ms);
+function updateTimerDisplay() {
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
   const intervalId = setInterval(() => {
+    const currentTime = Date.now();
+    let ms = userSelectedDate - currentTime;
     ms -= 1000;
+    console.log(ms);
     // Remaining days
     const days = Math.floor(ms / day);
     // Remaining hours
@@ -77,5 +76,5 @@ function updateTimerDisplay(ms) {
 buttonStart.addEventListener('click', function () {
   buttonStart.setAttribute('disabled', true);
   myInput.setAttribute('disabled', true);
-  updateTimerDisplay(timeLeft);
+  updateTimerDisplay();
 });
